@@ -1,0 +1,7 @@
+{
+  "name": "pokemon-challenge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
