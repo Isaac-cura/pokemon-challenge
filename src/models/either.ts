@@ -19,11 +19,13 @@ export class Failure<T> extends EitherType<T>{
     succeeded: false = false;
     failed: true = true;
     error = this.value
-     
+
     static create<T>(value?: T) {
         return new Failure(value)
     }
 }
 
 export type Either<T, U> = NonNullable<Failure<T> | Success<U>>;
+
+export type AsyncEither<T, U> = Promise<Either<T, U>>
 
