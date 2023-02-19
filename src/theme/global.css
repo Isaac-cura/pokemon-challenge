@@ -1,0 +1,51 @@
+@import url(./fonts/readex-pro.css);
+@import url(./fonts/roboto.css);
+
+h2 {
+    font-family: Readex Pro;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: var(--neutral-800);
+    margin: 0px;
+}
+
+.text-s {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.readex {
+    font-family: Readex Pro;
+}
+
+.roboto {
+    font-family: Roboto;
+}
+
+.n-800 {
+    color: var(--neutral-800)
+}
+
+.n-500 {
+    color: var(--neutral-500);
+}
+
+.flex { 
+    display: flex;
+}
+
+.chip {
+    --background: var(--neutral-100);
+    color: var(--neutral-500);
+}
+
+.chip ion-icon{
+    margin-left: 0 ;
+    margin-right: 8px;
+    vertical-align: baseline;
+    font-size: 15px;
+}
