@@ -1,6 +1,8 @@
 import PokemonCard from "@/components/pokemon-card.vue"
 import { VueWrapper, mount } from '@vue/test-utils'
 import { dummyBulbasaurParsed } from "../dummies/bulbasaur"
+import { pokemonTypeIcon } from "@/constants/types-icons";
+import { capitalize } from "vue";
 
 describe("Test suite for pokemon card component", () => {
     let pokemonCard: VueWrapper;
@@ -33,7 +35,18 @@ describe("Test suite for pokemon card component", () => {
 
     it("The card shows the pokemon type", () => {
         dummyBulbasaurParsed.types.forEach((type) => {
-            expect(pokemonCard.text()).toContain(type)
+            expect(pokemonCard.text()).toContain(capitalize(type))
+        })
+    })
+
+    it("the component render an icon for each pokemon type", () => {
+        expect(pokemonCard.findAll("ion-icon")).toHaveLength(dummyBulbasaurParsed.types.length)
+    })
+
+    it("the icon of pokemon types correspond to the type image", () => {
+        dummyBulbasaurParsed.types.forEach((type, i) => {
+            const iconPath = pokemonTypeIcon(type)
+            expect(pokemonCard.findAll("ion-icon")[i].element.src).toBe(iconPath)    
         })
     })
 

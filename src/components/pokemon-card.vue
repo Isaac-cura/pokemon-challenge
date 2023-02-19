@@ -13,21 +13,30 @@
         Experience <span>{{ pokemon?.experience }}</span>
       </div>
     </ion-card-content>
-    <ion-chip v-for="(pokemonType, index) of pokemon?.types" :key="index">
-      {{ pokemonType }}
+    <ion-chip v-for="(pokemonType, index) of pokemonTypes" :key="index">
+      <ion-icon :src="pokemonType.icon"></ion-icon>{{ pokemonType.type }}
     </ion-chip>
   </ion-card>
 </template>
 <script lang="ts" setup>
+import {
+  IonImg,
+  IonCard,
+  IonChip,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent
+} from '@ionic/vue';
+import { capitalize, computed } from 'vue';
 import { Pokemon } from '@/models/pokemon.model';
-import { IonImg } from '@ionic/vue';
-import { IonCard, IonChip } from '@ionic/vue';
-import { IonCardHeader } from '@ionic/vue';
-import { IonCardTitle } from '@ionic/vue';
-import { IonCardSubtitle } from '@ionic/vue';
-import { IonCardContent } from '@ionic/vue';
+import { pokemonTypeIcon } from '@/constants/types-icons'
 
 const props = defineProps<{ pokemon?: Pokemon }>()
+const pokemonTypes = computed(() => props.pokemon?.types.map((type) => ({
+  icon: pokemonTypeIcon(type),
+  type: capitalize(type)
+})))
 </script>
 <style>
 ion-img {
