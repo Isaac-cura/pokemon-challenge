@@ -23,4 +23,13 @@ describe("Test suite for either type checking", () => {
         expect(Failure.create().succeeded).toBeFalsy()
         expect(Failure.create().failed).toBeTruthy()
     })
+    it("Filter method in Success instance returns only the success instances in array", () => {
+        const arr = [Success.create(), Success.create(), Success.create(), Failure.create()]
+        expect(Success.filter(arr)).toHaveLength(3)
+    })
+    it("Filter method in Failure instance returns only the success instances in array", () => {
+        const arr = [Success.create(), Success.create(), Success.create(), Failure.create()]
+        expect(Failure.filter(arr)).toHaveLength(1)
+    })
+
 })
