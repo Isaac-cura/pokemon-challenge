@@ -10,7 +10,7 @@ export class Success<T> extends EitherType<T> {
     result = this.value
 
     static create<T>(value?: T) {
-        return new Success(value)
+        return new Success(value) as Success<T>
     }
     
     static filter<T, U>(arr: Either<T, U>[]): Success<U>[] {
@@ -26,7 +26,7 @@ export class Failure<T> extends EitherType<T>{
     error = this.value
     
     static create<T>(value?: T) {
-        return new Failure(value)
+        return new Failure(value) as Failure<T>
     }
 
     static filter<T, U>(arr: Either<T, U>[]): Failure<T>[] {
