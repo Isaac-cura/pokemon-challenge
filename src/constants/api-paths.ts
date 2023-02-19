@@ -5,6 +5,6 @@ export const apiPaths = {
         `${apiBase}/pokemon?limit=${limit}&offset=${offset}`,
     pokemonImage: (pokemonId: number) =>
         `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonId}.png`,
-    getPokemon: (pokemonId: number) => 
-        `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
+    getPokemonByName: (name: string) => 
+        `https://pokeapi.co/api/v2/pokemon/${name}/`
 }
