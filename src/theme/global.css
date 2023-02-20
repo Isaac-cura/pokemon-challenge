@@ -49,3 +49,7 @@ h2 {
     vertical-align: baseline;
     font-size: 15px;
 }
+
+.bg-n-50{
+    background-color: var(--neutral-50);
+}

@@ -1,8 +1,10 @@
 <template>
-    <div class="paginator-wrapper">
-        <button :class="{ active: button.active }" :disabled="button.active || !button.enabled"
+    <div class="paginator-wrapper flex ion-justify-content-center bg-n-50">
+        <button class="bg-n-50" :class="{ active: button.active }" :disabled="button.active || !button.enabled"
             @click="() => emitChange(button.target)" v-for="(button, i) of buttons" :key="i">
-            {{ button.text }}
+            <ion-icon v-if="button.text === '<'" :icon="chevronBackOutline"></ion-icon>
+            <ion-icon v-else-if="button.text === '>'" :icon="chevronForwardOutline"></ion-icon>
+            <span v-else>{{ button.text }}</span>
         </button>
     </div>
 </template>
@@ -10,6 +12,9 @@
 import { computed } from 'vue';
 import { EasyPaginator } from 'easy-paginator'
 import { ref, watch } from 'vue';
+import { IonIcon } from '@ionic/vue';
+import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
+
 const emit = defineEmits(["change"])
 const props = defineProps<{
     paginatorInfo: {
@@ -40,3 +45,30 @@ const emitChange = (page?: number) => {
     }
 }
 </script>
+<style>
+    .paginator-wrapper{
+        padding: 20px;
+        gap: 4px;
+    }
+    button{
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 4px !important;
+        overflow: hidden;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--neutral-600)
+    }
+    button.active{
+        background-color: var(--primary-color);
+        color: var(--neutral-50);
+        font-weight: 500;
+    }
+    ion-icon{
+        color: var(--primary-color)
+    }
+</style>
