@@ -7,8 +7,9 @@ import { usePokemonPageStore } from "@/stores/pokemon-page.store";
 describe("test suite for pokemon page store", () => {
 
     let pinia: Pinia;
-    let app = createApp({})
+  
     beforeEach(() => {
+        let app = createApp({})
         pinia = createPinia()
         app.use(pinia)
         setActivePinia(pinia)

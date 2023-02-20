@@ -1,5 +1,5 @@
 <template>
-  <ion-card @click="onClick">
+  <ion-card @click="onClick" data-test="pokemon-card">
     <ion-img :src="pokemon.imageUrl" alt="pokemon image" />
     <ion-card-header>
       <ion-card-title>

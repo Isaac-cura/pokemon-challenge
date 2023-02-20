@@ -12,10 +12,10 @@
           <ion-title size="large">Blank</ion-title>
         </ion-toolbar>
       </ion-header>
+      <div>
 
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <pokemon-card v-for="pokemon of pokemonPageStore.pokemonList" :pokemon="pokemon" :key="pokemon.name"></pokemon-card>
+        <item-paginator :paginator-info="pokemonPageStore.paginatorInfo" @change="paginate"></item-paginator>
       </div>
     </ion-content>
   </ion-page>
@@ -23,34 +23,18 @@
 
 <script setup lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import ItemPaginator from '@/components/item-paginator.vue';
+import { usePokemonPageStore } from '@/stores/pokemon-page.store';
+import { onMounted, toRef } from 'vue';
+import PokemonCard from '@/components/pokemon-card.vue';
+import { PokemonsPageState } from '@/models/pokemon-store.model';
+const pokemonPageStore = usePokemonPageStore()
+
+onMounted(() => {
+  pokemonPageStore.fetchAndUpdatePokemons(pokemonPageStore.paginatorInfo)
+})
+
+const paginate = (pageInfo: PokemonsPageState["paginatorInfo"]) => {
+  pokemonPageStore.fetchAndUpdatePokemons(pageInfo)
+}
 </script>
-
-<style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-</style>

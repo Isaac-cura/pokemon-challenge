@@ -44,7 +44,6 @@ describe("test suite for the paginator component", () => {
         const pageToGo = paginatorButton.text()
         paginatorButton.element.click()
         const emited = paginatorWrapper.emitted("change")
-        console.log(emited![0][0])
         await paginatorWrapper.setProps({ 
             paginatorInfo: emited![0][0]
         })

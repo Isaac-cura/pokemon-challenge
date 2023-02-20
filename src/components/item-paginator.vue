@@ -1,5 +1,5 @@
 <template>
-    <div class="paginator-wrapper flex ion-justify-content-center bg-n-50">
+    <div class="paginator-wrapper flex ion-justify-content-center bg-n-50"  data-test="item-paginator">
         <button class="bg-n-50" :class="{ active: button.active }" :disabled="button.active || !button.enabled"
             @click="() => emitChange(button.target)" v-for="(button, i) of buttons" :key="i">
             <ion-icon v-if="button.text === '<'" :icon="chevronBackOutline"></ion-icon>
