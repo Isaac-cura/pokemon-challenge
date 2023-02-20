@@ -23,10 +23,17 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './theme/global.css';
-
+import { createPinia } from 'pinia';
+import axios from 'axios';
+import { PokemonService } from './services/pokemon.service';
+const pinia = createPinia()
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(router)
+  .use(pinia);
+/**Create pokemon service and inject as a dependency to pinia */
+pinia.use(()=>  ({$pokemonService: new PokemonService(axios)}))
+
   
 router.isReady().then(() => {
   app.mount('#app');
