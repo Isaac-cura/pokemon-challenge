@@ -92,6 +92,23 @@ describe("test suite for pokemon page store", () => {
         await pokemonPageStore.fetchAndUpdatePokemons({ count: 0, offset: 30, limit: 10, segmentLength: 5 })
         expect(pokemonPageStore.pokemons.bulbasaur).not.toBeDefined()
     })
+    it("pokemonList getter returns empty array when the pokemons  state its empty", () => {
+        const pokemonPageStore = usePokemonPageStore()
+        expect(pokemonPageStore.pokemonList).toEqual([])
+    })
+    it("pokemonList getter returns an array with the pokemons inside pokemons state", () => {
+        const pokemonPageStore = usePokemonPageStore()
+        pokemonPageStore.pokemons.bulbasaur = dummyBulbasaurParsed
+        expect(pokemonPageStore.pokemonList).toEqual([dummyBulbasaurParsed])
+    })
+    it("pokemonList its updated when the pokemons change", async () => {
+        injectGetAllPokemonServiceToPinia(pinia, successfullyGetAllWithPikachu)
+        const pokemonPageStore = usePokemonPageStore()
+        pokemonPageStore.pokemons.bulbasaur = dummyBulbasaurParsed
+        expect(pokemonPageStore.pokemonList).toEqual([dummyBulbasaurParsed])
+        await pokemonPageStore.fetchAndUpdatePokemons({ count: 0, offset: 30, limit: 10, segmentLength: 5 })
+        expect(pokemonPageStore.pokemonList).toEqual([{...dummyBulbasaurParsed, name: "pikachu"}])
+    })
 
 })
 

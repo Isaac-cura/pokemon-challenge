@@ -15,6 +15,9 @@ export const usePokemonPageStore = defineStore("pokemon-page", {
         loading: false,
         error: false
     }),
+    getters: {
+        pokemonList: (state) => Object.values(state.pokemons)
+    },
     actions: {
         async fetchAndUpdatePokemons(paginatorInfo: PaginatorDataSource) {
             const {limit, offset} = paginatorInfo;
