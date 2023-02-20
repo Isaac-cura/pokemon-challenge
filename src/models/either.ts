@@ -5,8 +5,8 @@ abstract class EitherType<T>{
 }
 
 export class Success<T> extends EitherType<T> {
-    succeeded: true = true;
-    failed: false = false;
+    succeeded = true as const;
+    failed = false as const;
     result = this.value
 
     static create<T>(value?: T) {
@@ -21,8 +21,8 @@ export class Success<T> extends EitherType<T> {
 }
 
 export class Failure<T> extends EitherType<T>{
-    succeeded: false = false;
-    failed: true = true;
+    succeeded = false as const;
+    failed = true as const;
     error = this.value
     
     static create<T>(value?: T) {

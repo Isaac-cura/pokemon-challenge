@@ -38,7 +38,7 @@ export interface Pokemon {
     moves: string[]
     height: number
     weight: number
-    abilities: String[]
+    abilities: string[]
     stats: Stat[],
     types: string[]
 }
@@ -50,7 +50,14 @@ export interface Type {
     name: string
 }
 
-export interface Stat { }
+export interface Stat {
+    base_stat: number,
+    effort: number,
+    stat: {
+        name: string,
+        url: string
+    }
+}
 
 export function transfomPokemonDTO(dto: PokemonDTO["response"]): Pokemon {
     return {

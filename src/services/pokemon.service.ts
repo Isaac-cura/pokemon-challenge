@@ -18,7 +18,7 @@ export class PokemonService {
     }
 
     private async getPokemonListDetails(dto: PokemonListDTO["response"]) {
-        let { count, results } = dto;
+        const { count, results } = dto;
         return {
             count,
             results: this.filterFailedPokemons(
