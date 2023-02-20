@@ -1,6 +1,7 @@
+import { PokemonList } from "@/models/pokemon-list.model";
 import { PokemonsPageState } from "@/models/pokemon-store.model";
 import { Pokemon } from "@/models/pokemon.model";
-import { EasyPaginator, PaginatorDataSource } from "easy-paginator";
+import { PaginatorDataSource } from "easy-paginator";
 import { defineStore } from "pinia";
 
 export const usePokemonPageStore = defineStore("pokemon-page", {
@@ -18,33 +19,54 @@ export const usePokemonPageStore = defineStore("pokemon-page", {
     getters: {
         pokemonList: (state) => Object.values(state.pokemons)
     },
+
     actions: {
         async fetchAndUpdatePokemons(paginatorInfo: PaginatorDataSource) {
-            const {limit, offset} = paginatorInfo;
+            const { limit, offset } = paginatorInfo;
             this.loading = true;
             const pokemonsResponse = await this.$pokemonService.getAll(limit!, offset!)
-            if(pokemonsResponse.succeeded) {
-                this.error = false;
-                this.loading = false;
-                const fetchedPokemons = pokemonsResponse.result.results;                
-                this.pokemons = arrayToPokemonsObject(fetchedPokemons)
-                Object.assign(this.paginatorInfo, {
-                    ...paginatorInfo,
-                    count: pokemonsResponse.result.count
-                })
+            if (pokemonsResponse.succeeded) {
+                handleSuccessfullyPokemonListRequest(pokemonsResponse.result, paginatorInfo)
             } else {
-                this.loading = false;
-                this.error = true;
+                setFailedRequest()
             }
         },
-        
     }
 })
 
+
+const handleSuccessfullyPokemonListRequest = (pokemonList: PokemonList, paginator: PaginatorDataSource) => {
+    const pokemonPageStore = usePokemonPageStore()
+    setSuccessRequest();
+    pokemonPageStore.pokemons = arrayToPokemonsObject(pokemonList.results)
+    updateStatePaginator(paginator, pokemonList.count)
+
+}
+
+const setSuccessRequest = () => {
+    const pokemonPageStore = usePokemonPageStore()
+    pokemonPageStore.error = false;
+    pokemonPageStore.loading = false;
+}
+
+const setFailedRequest = () => {
+    const pokemonPageStore = usePokemonPageStore()
+    pokemonPageStore.error = true;
+    pokemonPageStore.loading = false;
+}
+
+const updateStatePaginator = (paginator: PaginatorDataSource, count: number) => {
+    const pokemonPageStore = usePokemonPageStore()
+    Object.assign(pokemonPageStore.paginatorInfo, {
+        ...paginator,
+        count
+    })
+}
+
 /**in states its better store plain objects over arrays */
-const arrayToPokemonsObject = (pokemons: Pokemon[]) =>  {
-    return pokemons.reduce((pokemonsObject, currentPokemon) =>({
+const arrayToPokemonsObject = (pokemons: Pokemon[]) => {
+    return pokemons.reduce((pokemonsObject, currentPokemon) => ({
         ...pokemonsObject,
         [currentPokemon.name]: currentPokemon
-    }) , {})
+    }), {})
 }
