@@ -57,10 +57,11 @@ const setFailedRequest = () => {
 
 const updateStatePaginator = (paginator: PaginatorDataSource, count: number) => {
     const pokemonPageStore = usePokemonPageStore()
-    Object.assign(pokemonPageStore.paginatorInfo, {
+    pokemonPageStore.paginatorInfo = {
+        ...pokemonPageStore.paginatorInfo,
         ...paginator,
         count
-    })
+    }
 }
 
 /**in states its better store plain objects over arrays */
