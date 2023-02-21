@@ -2,10 +2,10 @@ import PokemonDetailPage from '@/views/PokemonDetailsPage.vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing';
 import { usePokemonDetailStore } from '@/stores/pokemon-detail.store';
-import { useRoute } from 'vue-router';
+import { createRouter, useRoute } from 'vue-router';
 import { dummyBulbasaurParsed } from '../dummies/bulbasaur';
-import { TriggerOpTypes, capitalize, nextTick } from 'vue';
-import { TriggerOptions } from '@vue/test-utils/dist/createDomEvent';
+import { capitalize, nextTick } from 'vue';
+
 
 jest.mock("vue-router", () => ({
     useRoute: jest.fn()

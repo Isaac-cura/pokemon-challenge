@@ -4,6 +4,7 @@ import { createTestingPinia } from '@pinia/testing'
 import { usePokemonListStore } from '@/stores/pokemon-list.store'
 import { nextTick } from 'vue'
 import { dummyBulbasaurParsed } from '../dummies/bulbasaur'
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe("test suite for the home page", () => {
 
@@ -11,7 +12,10 @@ describe("test suite for the home page", () => {
     beforeEach(() => {
         homePageWrapper = mount(HomePage, {
             global: {
-                plugins: [createTestingPinia()]
+                plugins: [createTestingPinia(), createRouter({
+                    history: createWebHistory(),
+                    routes: [{path: '/', component: HomePage}]
+                  })]
             }
         })
     })

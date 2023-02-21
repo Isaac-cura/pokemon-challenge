@@ -31,9 +31,10 @@ import { onMounted } from 'vue';
 import PokemonCard from '@/components/pokemon-card.vue';
 import { PokemonListState } from '@/models/pokemon-store.model';
 import { Pokemon } from '@/models/pokemon.model';
+import { useRouter } from 'vue-router';
 
 const pokemonListStore = usePokemonListStore()
-const router = useIonRouter()
+const router = useRouter()
 onMounted(() => {
   pokemonListStore.fetchAndUpdatePokemons(pokemonListStore.paginatorInfo)
 })
