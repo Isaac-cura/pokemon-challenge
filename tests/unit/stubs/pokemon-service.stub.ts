@@ -9,16 +9,16 @@ export const requestFailure = async () => {
     return Failure.create()
 }
 
-export const getAllSuccess = async () => {
+export const getAllSuccess = async (limit: number, offset: number) => {
     return Success.create({
         count: 500,
         results:[dummyBulbasaurParsed]
     })
 }
 
-export const getAllWith2PokemonsSuccess = async () => {
+export const getAllSuccessWithPikachu = async (limit: number, offset: number) => {
     return Success.create({
         count: 500,
-        result: [dummyBulbasaurParsed, {...dummyBulbasaurParsed, name: "pikachu"}]
+        results:[{...dummyBulbasaurParsed, name: "pikachu"}]
     })
 }
