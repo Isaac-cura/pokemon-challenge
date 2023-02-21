@@ -1,19 +1,8 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
+    <list-header @change="searchByName" @toggle="openModal" class="ion-margin-bottom" />
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <div class="flex pokemon-cards-container">
-
         <pokemon-card class="pokemon-cards" @click="goToDetails" v-for="pokemon of pokemonListStore.pokemonList"
           :pokemon-count="pokemonListStore.paginatorInfo.count" :pokemon="pokemon" :key="pokemon.name">
         </pokemon-card>
@@ -24,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonContent, IonPage, modalController } from '@ionic/vue';
 import ItemPaginator from '@/components/item-paginator.vue';
 import { usePokemonListStore } from '@/stores/pokemon-list.store';
 import { onMounted } from 'vue';
@@ -32,6 +21,8 @@ import PokemonCard from '@/components/pokemon-card.vue';
 import { PokemonListState } from '@/models/pokemon-store.model';
 import { Pokemon } from '@/models/pokemon.model';
 import { useRouter } from 'vue-router';
+import ListHeader from '@/components/list-header.vue'
+import PokemonFilters from '@/modals/pokemon-filters.vue';
 
 const pokemonListStore = usePokemonListStore()
 const router = useRouter()
@@ -45,20 +36,30 @@ const paginate = (pageInfo: PokemonListState["paginatorInfo"]) => {
 const goToDetails = (pokemon: Pokemon) => {
   router.push(`/pokemon/${pokemon.name}`)
 }
+const searchByName = (name: string) => {
+  pokemonListStore.fetchPokemonByName(name)
+}
+
+const openModal = async () => {
+  const modal = await modalController.create({
+      component: PokemonFilters,
+    });
+    await modal.present();
+}
 </script>
 <style scoped>
-.pokemon-cards-container{
+.pokemon-cards-container {
   justify-content: center;
   flex-wrap: wrap;
-  gap: 50px;
 }
-.pokemon-cards{
+
+.pokemon-cards {
   margin-bottom: 16px;
   width: 100%;
 }
 
 @media (min-width: 600px) {
-  .pokemon-cards{
+  .pokemon-cards {
     max-width: 300px;
   }
 }

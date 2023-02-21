@@ -1,4 +1,4 @@
-import ChartJsFacade from '@/components/chart-js-facade/chart-js-facade.vue'
+import ChartJsFacade from '@/components/chart-js-facade.vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import { dummyBulbasaurParsed } from '../dummies/bulbasaur';
 import { Stat } from '@/models/pokemon.model';

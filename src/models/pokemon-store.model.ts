@@ -1,6 +1,13 @@
 import { Pokemon } from "./pokemon.model";
 
 export interface PokemonListState {
+    filters: {
+        criteria: string,
+        types: string[],
+        experience?: number;
+        moves?: number;
+    },
+    searchedPokemon?:Pokemon,
     pokemons: {
         [k: string]: Pokemon;
     };

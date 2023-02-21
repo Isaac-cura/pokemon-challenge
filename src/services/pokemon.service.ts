@@ -32,7 +32,7 @@ export class PokemonService {
             .map(response => response.result)
     }
 
-    async getByName(name: string): AsyncEither<undefined, Pokemon> {
+    async getByName(name: string, cancelable?: boolean): AsyncEither<undefined, Pokemon> {
         try {
             const response = await this.axios.get(apiPaths.getPokemonByName(name))
             return Success.create(transfomPokemonDTO(response.data))

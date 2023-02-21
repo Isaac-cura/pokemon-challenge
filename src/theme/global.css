@@ -11,7 +11,20 @@ h2 {
     color: var(--neutral-800);
     margin: 0px;
 }
-
+ion-searchbar{
+    --background: #19422d;
+    --color: #fff;
+    --placeholder-color: #fff;
+    --icon-color: #fff;
+    --clear-button-color: #fff;
+    --border-radius: 4px;
+}
+ion-icon {
+    color: var(--neutral-100);
+}
+ion-button ion-icon {
+    font-size: 20px;
+}
 h1 {
     font-family: Readex Pro;
     font-size: 24px;
@@ -41,6 +54,11 @@ h1 {
 .n-500 {
     color: var(--neutral-500);
 }
+
+.n-50 {
+    color: var(--neutral-50);
+}
+
 
 .flex { 
     display: flex;

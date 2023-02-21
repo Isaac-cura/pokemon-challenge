@@ -34,7 +34,7 @@
 import { Pokemon } from '@/models/pokemon.model';
 import { getHeightLabel, getWeightLabel } from '@/utils/transformers';
 import { capitalize } from 'vue';
-import ChartJsFacade from '@/components/chart-js-facade/chart-js-facade.vue';
+import ChartJsFacade from '@/components/chart-js-facade.vue';
 
 const props = defineProps<{ pokemon: Pokemon }>()
 const heightLabel = getHeightLabel(props.pokemon.height)

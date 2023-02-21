@@ -6,6 +6,13 @@ import { defineStore } from "pinia";
 
 export const usePokemonListStore = defineStore("pokemon-list", {
     state: (): PokemonListState => ({
+        filters: {
+            criteria: "",
+            types: [],
+            experience: undefined,
+            moves: undefined
+        },
+        searchedPokemon: undefined,
         pokemons: {},
         paginatorInfo: {
             count: 0,
@@ -17,7 +24,16 @@ export const usePokemonListStore = defineStore("pokemon-list", {
         error: false
     }),
     getters: {
-        pokemonList: (state) => Object.values(state.pokemons)
+        pokemonList: (state): Pokemon[] => {
+            const criteria = state.filters.criteria;
+            if(criteria) {
+                return [state.searchedPokemon].filter((pokemon):pokemon is Pokemon => pokemon?.name === criteria)
+            }
+            const pokemons = Object.values(state.pokemons);
+            return [filterByExperience, filterByTypes, filterByMoves]
+                .reduce((pokemons, filter) => filter(pokemons), pokemons)
+
+        },
     },
 
     actions: {
@@ -31,11 +47,62 @@ export const usePokemonListStore = defineStore("pokemon-list", {
                 setFailedRequest()
             }
         },
+        async fetchPokemonByName(pokemonName: string) {
+
+            this.filters.criteria = pokemonName
+            
+            const pokemon = pokemonFromList(pokemonName)
+            if(typeof pokemon === "undefined") {
+                this.searchedPokemon = undefined;
+                this.loading = true
+                const response = await this.$pokemonService.getByName(pokemonName)
+                if(response.succeeded) {
+                    this.searchedPokemon = response.result
+                    setSuccessRequest()
+                } else {
+                    setFailedRequest()
+                }
+            } else {
+                this.searchedPokemon = pokemon;
+            }
+        }
 
     }
 })
 
 
+
+export const pokemonFromList = (pokemonName: string) => {
+    const porkemonPageStore = usePokemonListStore()
+    return porkemonPageStore.pokemons[pokemonName]
+}
+export const filterByExperience = (pokemons: Pokemon[]):Pokemon[] => {
+    const porkemonPageStore = usePokemonListStore()
+    const experience = porkemonPageStore.filters.experience;
+    if (typeof experience === "undefined") {
+        return pokemons;
+    }
+    return pokemons.filter(pokemon => pokemon.experience === experience)
+}
+
+export const filterByMoves = (pokemons: Pokemon[]): Pokemon[] => {
+    const porkemonPageStore = usePokemonListStore();
+    const moves = porkemonPageStore.filters.moves;
+    if (typeof moves === "undefined") {
+        return pokemons;
+    }
+    return pokemons.filter(pokemon => pokemon.moves.length === moves)
+}
+
+const filterByTypes = (pokemons: Pokemon[]): Pokemon[] => {
+    const porkemonPageStore = usePokemonListStore()
+    const types = porkemonPageStore.filters.types
+    if (types.length === 0) {
+        return pokemons;
+    }
+    return pokemons.filter(pokemon =>
+        pokemon.types.some(type => types.includes(type)))
+}
 
 
 const handleSuccessfullyPokemonListRequest = (pokemonList: PokemonList, paginator: PaginatorDataSource) => {

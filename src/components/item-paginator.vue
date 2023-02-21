@@ -2,8 +2,8 @@
     <div class="paginator-wrapper flex ion-justify-content-center bg-n-50"  data-test="item-paginator">
         <button class="bg-n-50" :class="{ active: button.active }" :disabled="button.active || !button.enabled"
             @click="() => emitChange(button.target)" v-for="(button, i) of buttons" :key="i">
-            <ion-icon v-if="button.text === '<'" :icon="chevronBackOutline"></ion-icon>
-            <ion-icon v-else-if="button.text === '>'" :icon="chevronForwardOutline"></ion-icon>
+            <ion-icon class="n-500" v-if="button.text === '<'" :icon="chevronBackOutline"></ion-icon>
+            <ion-icon class="n-500" v-else-if="button.text === '>'" :icon="chevronForwardOutline"></ion-icon>
             <span v-else>{{ button.text }}</span>
         </button>
     </div>

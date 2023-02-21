@@ -2,7 +2,7 @@ import PokemonDetailPage from '@/views/PokemonDetailsPage.vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing';
 import { usePokemonDetailStore } from '@/stores/pokemon-detail.store';
-import { createRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { dummyBulbasaurParsed } from '../dummies/bulbasaur';
 import { capitalize, nextTick } from 'vue';
 
