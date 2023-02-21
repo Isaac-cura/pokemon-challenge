@@ -24,7 +24,7 @@ export const usePokemonListStore = defineStore("pokemon-list", {
         async fetchAndUpdatePokemons(paginatorInfo: PaginatorDataSource) {
             const { limit, offset } = paginatorInfo;
             this.loading = true;
-            const pokemonsResponse = await this.$pokemonService.getAll(limit!, offset!)
+            const pokemonsResponse = await this.$pokemonService.getAll(limit ?? 0, offset ?? 0)
             if (pokemonsResponse.succeeded) {
                 handleSuccessfullyPokemonListRequest(pokemonsResponse.result, paginatorInfo)
             } else {

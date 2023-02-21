@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import ItemPaginator from '@/components/item-paginator.vue';
 import { usePokemonListStore } from '@/stores/pokemon-list.store';
 import { onMounted } from 'vue';
