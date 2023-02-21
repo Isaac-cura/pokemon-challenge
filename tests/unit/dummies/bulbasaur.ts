@@ -81,8 +81,8 @@ export const dummyBulbasaurParsed = {
     imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png",
     experience: 64,
     moves: ["razor-wind", "swords-dance", "cut"],
-    height: 7,
-    weight: 69,
+    height: 0.7,
+    weight: 6.9,
     abilities: ["overgrow", "chlorophyll"],
     types: ["grass", "poison"],
     stats: [        {

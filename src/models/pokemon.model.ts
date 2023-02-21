@@ -66,10 +66,14 @@ export function transfomPokemonDTO(dto: PokemonDTO["response"]): Pokemon {
         imageUrl: dto?.sprites?.other?.home?.front_default,
         experience: dto.base_experience,
         moves: dto.moves.map(rawMove => rawMove.move.name),
-        height: dto.height,
-        weight: dto.weight,
+        height: fixMeasure(dto.height),
+        weight: fixMeasure(dto.weight),
         abilities: dto.abilities.map(ability => ability?.ability?.name),
         stats: dto.stats,
         types: dto.types.map(typeRaw => typeRaw?.type?.name)
     }
+}
+
+function fixMeasure(value: number) {
+    return value / 10;
 }

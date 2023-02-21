@@ -109,7 +109,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-tint: #f5f6f9;
 
   /** text **/
-  --ion-text-color: red;
+  --ion-text-color: var(--neutral-500);
   
   --ion-font-family: Roboto;
 

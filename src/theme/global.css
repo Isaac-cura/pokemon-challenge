@@ -12,6 +12,14 @@ h2 {
     margin: 0px;
 }
 
+h1 {
+    font-family: Readex Pro;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--neutral-800);
+    margin: 0px;
+}
+
 .text-s {
     font-weight: 400;
     font-size: 14px;
@@ -52,4 +60,32 @@ h2 {
 
 .bg-n-50{
     background-color: var(--neutral-50);
+}
+
+.subtitle{
+    font-family: Readex Pro;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--neutral-600);
+}
+
+.center{
+    text-align: center;
+}
+
+.pokemon-type {
+    padding: 6px 8px;
+    margin-right: 12px;
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    border-radius: 2px;
+    background-color: var(--neutral-600);
+}
+
+.pokemon-type.grass{
+    background-color: #16C172;
+}
+.pokemon-type.poison{
+    background-color: #6E44FF;
 }
