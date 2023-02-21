@@ -39,6 +39,7 @@ import {
 import { capitalize, computed } from 'vue';
 import { Pokemon } from '@/models/pokemon.model';
 import { pokemonTypeIcon } from '@/constants/types-icons'
+import { addZerosToId } from '@/utils/transformers';
 const props = withDefaults(defineProps<{ pokemon: Pokemon, pokemonCount?: number }>(), {
   pokemonCount: 0
 })
@@ -51,13 +52,7 @@ const pokemonTypes = computed(() => props.pokemon.types.map((type) => ({
 
 const pokemonName = computed(() => capitalize(props.pokemon.name))
 
-const pokemonId = computed(() => {
-  const minZeroPokemonCount = Math.max(0, props.pokemonCount)
-  const pokemonIdLength = props.pokemon.id.toString().length
-  const pokemonCountLength = minZeroPokemonCount.toString().length ?? pokemonIdLength;
-  const missingCharacters = Math.max(0, pokemonCountLength - pokemonIdLength) 
-  return "0".repeat(missingCharacters) + props.pokemon.id
-})
+const pokemonId = computed(() =>  addZerosToId(props.pokemon.id, props.pokemonCount))
 
 const onClick = () => {
   emit("click", props.pokemon)
