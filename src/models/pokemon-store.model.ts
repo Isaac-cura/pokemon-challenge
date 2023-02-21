@@ -1,6 +1,6 @@
 import { Pokemon } from "./pokemon.model";
 
-export interface PokemonsPageState {
+export interface PokemonListState {
     pokemons: {
         [k: string]: Pokemon;
     };
