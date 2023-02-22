@@ -89,6 +89,9 @@ ionic cap open android
 
 @Todo  - compilar a travez de terminal sin tener que pasar por android estudio para tares de ci/cd
 
-Acá te dejo un apk con la última versión del código:
+## Descarga el apk de la última versión
 
 [app-debug.apk](public/assets/readme/app-debug.apk)
+
+## Demo online
+[Pokemon-Challenge](https://63f5b6c9d15fe746f333be0b--leafy-peony-70c0f2.netlify.app/)
