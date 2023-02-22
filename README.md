@@ -44,6 +44,8 @@ npm run serve
 ```
 CONGRATULATIONS! 🎉
 
+![](public/assets/readme/app-pokemon(2).png)
+
 
 
 ## TEST
