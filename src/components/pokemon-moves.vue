@@ -39,7 +39,8 @@ const moveLengthLabel = computed(() => {
 .pokemon-moves {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
+    justify-content: center;
     margin-top: 15px;
 }
 .pokemon-move ion-icon {
