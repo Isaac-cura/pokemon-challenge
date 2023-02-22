@@ -11,7 +11,7 @@ describe("test suite for pokemon page store", () => {
     let pokemonListStore: ReturnType<typeof usePokemonListStore>;
 
     beforeEach(() => {
-        let app = createApp({})
+        const app = createApp({})
         pinia = createPinia()
         app.use(pinia)
         setActivePinia(pinia)

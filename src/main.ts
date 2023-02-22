@@ -23,6 +23,7 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './theme/global.css';
+import './registerServiceWorker'
 import { createPinia } from 'pinia';
 import axios from 'axios';
 import { PokemonService } from './services/pokemon.service';

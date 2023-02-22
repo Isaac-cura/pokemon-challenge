@@ -14,7 +14,7 @@ jest.mock("vue-router", () => ({
 describe("test suite for pokemon details page", () => {
     let pokemonDetailPageWrapper: VueWrapper;
     let pokemonDetailStore: ReturnType<typeof usePokemonDetailStore>
-    let mockedUseRoute = <jest.Mocked<ReturnType<typeof jest.fn>>>useRoute
+    const mockedUseRoute = <jest.Mocked<ReturnType<typeof jest.fn>>>useRoute
 
 
     const refreshMount = () => {
