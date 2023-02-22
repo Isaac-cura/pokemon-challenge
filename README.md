@@ -15,7 +15,7 @@ Entre sus funcionalidades principales se encuentran:
 
 - Se utilizó el patrón repository para inyectar servicios para las llamadas a las apis
 - Se utilizó el patrón fachada(en escencia) para simplificar el uso de bibliotechas como chartjs
-- Se manejaron las excepciones asiendo uso de eithers
+- Se manejaron las excepciones haciendo uso de eithers
 - Se utilizó gitflow, con semantic commits
 - Se utilizó semantig version taggeando y haciendo release de las diversas features del desarrollo
 - Se desarrolló usando TDD
