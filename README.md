@@ -44,19 +44,12 @@ npm run serve
 ```
 CONGRATULATIONS! 🎉
 
-ya podrás ver algo así en web
 
-![project running in web](public/assets/readme/npm-run-serve.png)
-
-y algo como esto en mobile
-
-![project running in mobile](public/assets/readme/mobile.png)
 
 ## TEST
 
 El proyecto se desarrolló usando TDD(en principio) por lo cual cuenta con una suite de test nutrida
 
-![](public/assets/readme/Captura%20de%20pantalla%20de%202023-02-21%2023-49-41.png)
 
 para correrlos debes usar el siguiente comando
 
@@ -64,4 +57,36 @@ para correrlos debes usar el siguiente comando
 npm run test:unit
 
 ```
-## Gracias 
+## GENERAR APK PARA ANDROID 
+
+Primero debemos generar un build de nuestro código
+```
+ionic build
+
+```
+
+Luego se debe copiar el output del build al proyecto de android studio
+
+```
+ionic cap copy
+
+```
+
+si se añadió un nuevo plugin al momento de realizar el compilado debes utilizar el siguiente comando
+```
+ionic cap sync
+
+```
+
+luego de esto se ejecuta este comando para abrir el proyecto en android studio y compilar desde ahí
+
+```
+ionic cap open android
+
+```
+
+@Todo  - compilar a travez de terminal sin tener que pasar por android estudio para tares de ci/cd
+
+Acá te dejo un apk con la última versión del código:
+
+[app-debug.apk](public/assets/readme/app-debug.apk)
