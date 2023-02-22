@@ -24,7 +24,7 @@ export const usePokemonListStore = defineStore("pokemon-list", {
         error: false
     }),
     getters: {
-        pokemonResultCount: (state): number => {
+        pokemonResultCount: (): number => {
             const pokemonListStore = usePokemonListStore()
             return pokemonListStore.pokemonList.length
         },
