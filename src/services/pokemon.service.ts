@@ -5,7 +5,7 @@ import { AsyncEither, Either, Failure, Success } from "@/models/either";
 import { Pokemon, transfomPokemonDTO } from "@/models/pokemon.model";
 
 export class PokemonService {
-
+    private controller?: AbortController;
     constructor(private axios: Axios) { }
 
     async getAll(limit: number, offset: number): AsyncEither<undefined, PokemonList> {
@@ -33,11 +33,28 @@ export class PokemonService {
     }
 
     async getByName(name: string, cancelable?: boolean): AsyncEither<undefined, Pokemon> {
+        const controller = new AbortController();
+        if(cancelable) {
+            this.controller?.abort();
+            this.controller = controller;
+        }
         try {
-            const response = await this.axios.get(apiPaths.getPokemonByName(name))
+            await delay()
+            const response = await this.axios.get(apiPaths.getPokemonByName(name), {
+                signal: controller.signal
+            })
             return Success.create(transfomPokemonDTO(response.data))
         } catch {
             return Failure.create()
         }
     }
+}
+
+/**programatic delay to prevent flashings with the loadings */
+const delay = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(undefined)
+        }, 250)
+    })
 }

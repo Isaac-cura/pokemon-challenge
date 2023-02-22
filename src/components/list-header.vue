@@ -32,8 +32,9 @@
 <script setup lang="ts">
 import { IonHeader, IonToolbar, IonTitle, IonInput, IonIcon, IonButton, IonButtons, IonItem } from '@ionic/vue';
 import { search, close } from 'ionicons/icons';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 const emit = defineEmits(["change", "toggle"])
+const props = defineProps<{pokemonName: string}>()
 const input = ref();
 const criteria = ref("");
 const emitChange = (event: CustomEvent) => {
@@ -49,6 +50,10 @@ const focusInput = () => {
 const emitToggle = () => {
     emit("toggle")
 }
+watch(() => props.pokemonName, () => {
+    criteria.value = props.pokemonName
+})
+
 </script>
 <style scoped>
 ion-header {

@@ -7,7 +7,7 @@
                         <ion-back-button defaultHref="/home"></ion-back-button>
                     </ion-buttons>
                 </ion-toolbar>
-                <h1 class="n-800 center">{{ pokemonNameCapitalized }} <span>#{{ pokemonId }}</span></h1> 
+                <h1 class="n-800 center">{{ pokemonNameCapitalized }} <span>#{{ pokemonId }}</span></h1>
                 <ion-img :src="activePokemon?.imageUrl" />
             </ion-header>
             <ion-segment :value="pokemonDetailStore.activeTab" @ion-change="changeTab">
@@ -25,14 +25,14 @@
             <div v-if="activePokemon" class="ion-padding">
                 <pokemon-details class="pokemon-details" :pokemon="activePokemon"
                     v-if="pokemonDetailStore.activeTab === 'about'" />
-                <pokemon-moves v-else-if="pokemonDetailStore.activeTab === 'moves'" />
+                <pokemon-moves :pokemon="activePokemon" v-else-if="pokemonDetailStore.activeTab === 'moves'" />
             </div>
         </ion-content>
     </ion-page>
 </template>
 <script setup lang="ts">
 import { usePokemonDetailStore } from '@/stores/pokemon-detail.store';
-import { onMounted, computed, capitalize } from 'vue';
+import { onMounted, computed, capitalize, onBeforeUpdate } from 'vue';
 import { useRoute } from 'vue-router';
 import { IonContent, IonHeader, IonToolbar, IonImg, IonSegment, IonSegmentButton, IonButtons, IonBackButton, IonPage } from '@ionic/vue';
 import PokemonDetails from '@/components/pokemon-details.vue';
@@ -45,11 +45,15 @@ const pokemonName: string = route.params.name as string;
 const pokemonDetailStore = usePokemonDetailStore()
 const pokemonListStore = usePokemonListStore()
 const pokemonCount = pokemonListStore.paginatorInfo.count;
-
 const activePokemon = computed(() => pokemonDetailStore.getIfActive(pokemonName))
 const pokemonId = computed(() => addZerosToId(activePokemon.value?.id ?? 0, pokemonCount))
+
 onMounted(() => {
-    pokemonDetailStore.setActivePokemon(pokemonName)
+    pokemonDetailStore.setActivePokemon(pokemonName);
+})
+
+onBeforeUpdate(() => {
+    pokemonDetailStore.setActiveTab("about");
 })
 
 
@@ -87,7 +91,7 @@ ion-segment-button {
     font-size: 16px;
 }
 
-h1 span{
+h1 span {
     font-weight: 500;
     font-size: 16px;
 }

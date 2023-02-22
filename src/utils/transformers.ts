@@ -34,6 +34,13 @@ export function statsToChart(stats: Stat[]):ChartDataSource {
         datasets: [{data: stats.map(stat => stat.base_stat)}]
     }
 }
+export function getResultsMessage(results: number) {
+    if(results == 1) {
+        return "1 result for this search"
+    } else {
+        return `${results} results for this search`
+    }
+}
 export function addZerosToId(id: number, count: number) {
   const minZeroPokemonCount = Math.max(0, count)
   const pokemonIdLength = id.toString().length
